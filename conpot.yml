@@ -1,0 +1,79 @@
+---
+  - hosts: all
+
+    tasks:
+      - name: Conpot | Gather | print os info
+        debug:
+          msg: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}"
+
+      - name: Conpot | Gather | os info
+        include_vars: "{{ item }}"
+        with_first_found:
+          - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+          - "{{ ansible_distribution }}.yml"
+
+      - name: Conpot | Gather | default info
+        include_vars:
+          file: default.yml
+        tags: vars
+
+      - name: Conpot | install non-specific packages
+        package:
+          name: "{{ item }}"
+        with_items: "{{ pkgs }}"
+
+      - name: Conpot | install os-specific packages
+        package:
+          name: "{{ item }}"
+        with_items: "{{ pkgs_osspec }}"
+
+      # - name: Conpot | clone conpot source
+      #   git:
+      #     repo: "{{ conpot_repo }}"
+      #     version: "{{ conpot_version }}"
+      #     dest: "{{ conpot_dir }}"
+
+      - name: Conpot | update pip
+        pip:
+          name: pip
+          virtualenv: "{{ conpot_dir }}/conpot-env"
+          state: latest
+        tags:
+          - skip_ansible_lint
+
+      - name: Conpot | update setuptools
+        pip:
+          name: setuptools
+          virtualenv: "{{ conpot_dir }}/conpot-env"
+          state: latest
+        tags:
+          - skip_ansible_lint
+
+      - name: Conpot | install conpot
+        pip:
+          name: "git+{{ conpot_repo }}#egg=conpot-dev"
+          virtualenv: "{{ conpot_dir }}/conpot-env"
+
+      - name: Conpot | copy conpot sysconfig file
+        copy:
+          dest: "{{ sysconfig_dir }}/conpot"
+          src: conpot.sysconfig
+          mode: 0644
+
+      - name: Conpot | install Runit for CentOS hosts
+        yum:
+          name: "{{ runit_rpm_src }}"
+          state: present
+        when: ansible_distribution|lower == 'centos'
+
+      - name: Conpot | create runit directories
+        file:
+          state: directory
+          path: "{{ runit_service_dir }}"
+          mode: 0755
+
+      - name: Conpot | create conpot runit run file
+        template:
+          src: conpot.run.j2
+          dest: "{{ runit_service_dir }}/run"
+          mode: 0755

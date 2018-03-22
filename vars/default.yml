@@ -1,0 +1,14 @@
+---
+  pkgs:
+    - git
+    - gcc
+    - python
+    - python-pip
+    - python-virtualenv
+
+  conpot_repo: https://github.com/mushorg/conpot.git
+  conpot_version: Release_0.5.1
+
+  conpot_dir: /opt/conpot
+
+  runit_service_dir: /etc/service/conpot

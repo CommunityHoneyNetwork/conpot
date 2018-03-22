@@ -1,0 +1,16 @@
+version: '2'
+services:
+  ubuntu:
+    build:
+      context: .
+      dockerfile: Dockerfile-ubuntu
+    image: conpot:ubuntu
+    volumes:
+      - ./conpot.sysconfig:/etc/default/conpot:z
+  centos:
+    build:
+      context: .
+      dockerfile: Dockerfile-centos
+    image: conpot:centos
+    volumes:
+      - ./conpot.sysconfig:/etc/sysconfig/conpot:z

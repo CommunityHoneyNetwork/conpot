@@ -43,7 +43,7 @@ setup_conpot_conf () {
     local uid=${3:-}
     local secret=${4:-}
 
-    pushd /opt/conpot
+    pushd {{ conpot_dir }}
     cp /opt/conpot.cfg.template conpot.cfg
 
     sed -i "s/host = \$HPF_HOST$/host = ${server}/g" conpot.cfg
@@ -108,7 +108,7 @@ main() {
     setup_conpot_conf ${feeds_server} \
                       ${feeds_server_port} \
                       ${uid} ${secret}
-    exec /opt/conpot/conpot-env/bin/conpot --template default -c /opt/conpot/conpot.cfg -l /var/log/conpot.log
+    exec {{ conpot_dir }}/conpot-env/bin/conpot --template $CONPOT_TEMPLATE -c {{ conpot_dir }}/conpot.cfg -l /var/log/conpot.log
 }
 
 main "$@"

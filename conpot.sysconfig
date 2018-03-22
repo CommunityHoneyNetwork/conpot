@@ -19,3 +19,6 @@ DEPLOY_KEY=
 # Registration information file
 # If running in a container, this needs to persist
 CONPOT_JSON="/etc/conpot/conpot.json"
+
+# Conpot specific configuration options
+CONPOT_TEMPLATE=default

@@ -17,6 +17,7 @@ register () {
     local json="${3:-conpot}"
     local hostname="$(hostname -f)"
     local honeypot="conpot"
+    local ip="${4:-}"
 
     if [[ -z ${deploy_key} ]]
     then
@@ -31,6 +32,7 @@ register () {
          --data "{
       \"name\": \"${hostname}-${honeypot}\",
       \"hostname\": \"$hostname\",
+      \"ip\": \"${ip}\",
       \"deploy_key\": \"$deploy_key\",
       \"honeypot\": \"$honeypot\"
     }" ${chnserver}/api/sensor/
@@ -68,6 +70,7 @@ main() {
     local feeds_server=${FEEDS_SERVER:-localhost}
     local feeds_server_port=${FEEDS_SERVER_PORT:-10000}
     local json=${CONPOT_JSON:-conpot.json}
+    local ip=${IP_ADDRESS:-}
 
     local debug=${DEBUG:-false}
 
@@ -80,7 +83,7 @@ main() {
     # If it doesn't exist or is empty
     if [[ ! -f ${json} ]] || [[ ! -s ${json} ]]
     then
-        register ${deploy_key} ${chn_server} ${json}
+        register ${deploy_key} ${chn_server} ${json} ${ip}
 
         return=$?
 

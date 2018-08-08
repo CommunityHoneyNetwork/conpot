@@ -10,5 +10,7 @@
     - python-mysqldb
     - pkg-config
     - libvirt-dev
+    - runit
+    - curl
 
   sysconfig_dir: /etc/default

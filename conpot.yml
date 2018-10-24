@@ -51,7 +51,7 @@
 
       - name: Conpot | install conpot
         pip:
-          name: "git+{{ conpot_repo }}#egg=conpot-dev"
+          name: "git+{{ conpot_repo }}@{{ conpot_version }}#egg=conpot-dev"
           virtualenv: "{{ conpot_dir }}/conpot-env"
 
       - name: Conpot | copy conpot sysconfig file

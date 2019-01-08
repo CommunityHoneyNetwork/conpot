@@ -44,6 +44,7 @@ setup_conpot_conf () {
     local server_port=${2:-}
     local uid=${3:-}
     local secret=${4:-}
+    local tags=${5:-}
 
     pushd {{ conpot_dir }}
     cp /opt/conpot.cfg.template conpot.cfg
@@ -52,6 +53,7 @@ setup_conpot_conf () {
     sed -i "s/port = \$HPF_PORT$/port = ${server_port}/g" conpot.cfg
     sed -i "s/ident = \$HPF_IDENT$/ident = ${uid}/g" conpot.cfg
     sed -i "s/secret = \$HPF_SECRET$/secret= ${secret}/g" conpot.cfg
+    sed -i "s/tags = \$HPF_TAGS$/tags= ${tags}/g" conpot.cfg
 
     popd
 }
@@ -71,6 +73,7 @@ main() {
     local feeds_server_port=${FEEDS_SERVER_PORT:-10000}
     local json=${CONPOT_JSON:-conpot.json}
     local ip=${IP_ADDRESS:-}
+    local tags=${TAGS:-}
 
     local debug=${DEBUG:-false}
 
@@ -110,7 +113,8 @@ main() {
 
     setup_conpot_conf ${feeds_server} \
                       ${feeds_server_port} \
-                      ${uid} ${secret}
+                      ${uid} ${secret} \
+                      ${tags}
     exec {{ conpot_dir }}/conpot-env/bin/conpot --template $CONPOT_TEMPLATE -c {{ conpot_dir }}/conpot.cfg -l /var/log/conpot.log
 }
 

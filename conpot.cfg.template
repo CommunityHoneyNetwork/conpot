@@ -33,6 +33,7 @@ port = $HPF_PORT
 ident = $HPF_IDENT
 secret = $HPF_SECRET
 channels = ["conpot.events", ]
+tags = $HPF_TAGS
 
 [taxii]
 enabled = False

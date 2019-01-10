@@ -75,7 +75,13 @@ class LogWorker(object):
             ident = config.get('hpfriends', 'ident')
             secret = config.get('hpfriends', 'secret')
             channels = eval(config.get('hpfriends', 'channels'))
-            self.tags = config.get('hpfriends', 'tags').split(",")
+
+            try:
+                self.tags = [tag.strip() for tag in config.get('hpfriends', 'tags').split(',')]
+            except Exception as e:
+                logger.exception(e.message)
+                self.tags = []
+
             try:
                 self.friends_feeder = HPFriendsLogger(host, port, ident, secret, channels)
             except Exception as e:

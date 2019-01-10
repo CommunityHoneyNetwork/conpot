@@ -114,7 +114,7 @@ main() {
     setup_conpot_conf ${feeds_server} \
                       ${feeds_server_port} \
                       ${uid} ${secret} \
-                      ${tags}
+                      "${tags}"
     exec {{ conpot_dir }}/conpot-env/bin/conpot --template $CONPOT_TEMPLATE -c {{ conpot_dir }}/conpot.cfg -l /var/log/conpot.log
 }
 

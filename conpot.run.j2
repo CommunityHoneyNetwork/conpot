@@ -53,7 +53,7 @@ setup_conpot_conf () {
     sed -i "s/port = \$HPF_PORT$/port = ${server_port}/g" conpot.cfg
     sed -i "s/ident = \$HPF_IDENT$/ident = ${uid}/g" conpot.cfg
     sed -i "s/secret = \$HPF_SECRET$/secret= ${secret}/g" conpot.cfg
-    sed -i "s/tags = \$HPF_TAGS$/tags= ${tags}/g" conpot.cfg
+    sed -i "s|tags = \$HPF_TAGS$|tags= ${tags}|g" conpot.cfg
 
     popd
 }

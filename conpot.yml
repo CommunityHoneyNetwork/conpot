@@ -49,6 +49,12 @@
         tags:
           - skip_ansible_lint
 
+      - name: Conpot | install latest scapy release
+        pip:
+          name: scapy
+          virtualenv: "{{ conpot_dir }}/conpot-env"
+          extra_args: --pre
+
       - name: Conpot | install conpot
         pip:
           name: "git+{{ conpot_repo }}@{{ conpot_version }}#egg=conpot-dev"

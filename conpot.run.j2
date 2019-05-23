@@ -24,7 +24,7 @@ register () {
         return 1
     fi
 
-    curl --verbose \
+    curl --insecure \
          --silent \
          --request POST \
          --header "Content-Type: application/json" \

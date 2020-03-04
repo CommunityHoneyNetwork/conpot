@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   ubuntu:
     build:
@@ -6,4 +6,4 @@ services:
       dockerfile: Dockerfile-ubuntu
     image: conpot:ubuntu
     volumes:
-      - ./conpot.sysconfig:/etc/default/conpot:z
+      - ./conpot/conpot:/etc/conpot/:z

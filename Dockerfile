@@ -14,6 +14,7 @@ ENV DOCKER "yes"
 ENV CONPOT_USER "conpot"
 ENV CONPOT_GROUP "conpot"
 ENV CONPOT_DIR "/opt/conpot"
+ENV CONPOT_JSON "/etc/conpot/conpot.json"
 
 RUN mkdir /code
 ADD output /code/output
@@ -50,5 +51,3 @@ RUN python3 setup.py install --user --prefix=
 COPY output/log_worker.py ${CONPOT_DIR}/conpot/conpot/core/loggers
 
 ENV PATH=$PATH:/home/conpot/.local/bin
-
-ENTRYPOINT ["/code/entrypoint.sh"]

@@ -21,7 +21,8 @@ main () {
         -p conpot \
         -d "${DEPLOY_KEY}" \
         -u "${CHN_SERVER}" -k \
-        -o "${CONPOT_JSON}"
+        -o "${CONPOT_JSON}" \
+        -i "${IP_ADDRESS}"
 
     local uid="$(cat ${CONPOT_JSON} | jq -r .identifier)"
     local secret="$(cat ${CONPOT_JSON} | jq -r .secret)"

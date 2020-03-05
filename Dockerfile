@@ -51,3 +51,4 @@ RUN python3 setup.py install --user --prefix=
 COPY output/log_worker.py ${CONPOT_DIR}/conpot/conpot/core/loggers
 
 ENV PATH=$PATH:/home/conpot/.local/bin
+ENTRYPOINT ["/code/entrypoint.sh"]

@@ -20,7 +20,7 @@ main () {
     chn-register.py \
         -p conpot \
         -d "${DEPLOY_KEY}" \
-        -u "http://${CHN_SERVER}" -k \
+        -u "${CHN_SERVER}" -k \
         -o "${CONPOT_JSON}"
 
     local uid="$(cat ${CONPOT_JSON} | jq -r .identifier)"

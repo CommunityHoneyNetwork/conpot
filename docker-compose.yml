@@ -3,7 +3,7 @@ services:
   ubuntu:
     build:
       context: .
-      dockerfile: Dockerfile-ubuntu
+      dockerfile: Dockerfile
     image: conpot:ubuntu
     volumes:
-      - ./conpot/conpot:/etc/conpot/:z
+      - ./conpot:/etc/conpot/:z

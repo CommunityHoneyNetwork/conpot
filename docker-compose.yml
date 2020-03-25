@@ -1,9 +1,9 @@
 version: '3'
 services:
-  ubuntu:
+  conpot:
     build:
       context: .
       dockerfile: Dockerfile
-    image: conpot:ubuntu
+    image: conpot:latest
     volumes:
       - ./conpot:/etc/conpot/:z

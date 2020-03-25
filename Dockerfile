@@ -28,7 +28,7 @@ RUN apt-get update \
 
 RUN groupadd -r -g 1000 ${CONPOT_GROUP} && \
     useradd -r -u 1000 -m -g ${CONPOT_GROUP} ${CONPOT_USER} && \
-    mkdir /var/log/conpot && \
+    mkdir /var/log/conpot /etc/conpot && \
     chown ${CONPOT_USER}:${CONPOT_GROUP} -R /var/log/conpot /etc/conpot && \
     mkdir /opt/conpot && \
     chown ${CONPOT_USER}:${CONPOT_GROUP} -R /opt/conpot && \

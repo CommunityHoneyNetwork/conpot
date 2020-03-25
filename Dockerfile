@@ -1,8 +1,8 @@
 FROM ubuntu:18.04
 
-LABEL maintainer Alexander Merck <alexander.t.merck@gmail.com>
-LABEL name "wordpot"
-LABEL version "0.2"
+LABEL maintainer Team STINGAR <team-stingar@duke.edu>
+LABEL name "conpot"
+LABEL version "1.9"
 LABEL release "1"
 LABEL summary "Conpot Honeypot container"
 LABEL description "Conpot is an ICS honeypot with the goal to collect intelligence about the motives and methods of adversaries targeting industrial control systems"
@@ -40,7 +40,7 @@ RUN pip3 install --no-cache-dir --upgrade pip pika requests fluent-logger cymruw
 
 RUN mkdir -p /etc/conpot /var/log/conpot /usr/share/wireshark && \
     wget https://github.com/wireshark/wireshark/raw/master/manuf -o /usr/share/wireshark/manuf
-
+RUN chown $CONPOT_USER /etc/conpot /var/log/conpot
 USER $CONPOT_USER
 RUN git clone --branch Release_0.6.0 https://github.com/mushorg/conpot.git
 

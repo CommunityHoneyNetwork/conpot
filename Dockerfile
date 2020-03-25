@@ -29,9 +29,9 @@ RUN apt-get update \
 RUN groupadd -r -g 1000 ${CONPOT_GROUP} && \
     useradd -r -u 1000 -m -g ${CONPOT_GROUP} ${CONPOT_USER} && \
     mkdir /var/log/conpot && \
-    chown conpot:conpot -R /var/log/conpot && \
+    chown ${CONPOT_USER}:${CONPOT_GROUP} -R /var/log/conpot /etc/conpot && \
     mkdir /opt/conpot && \
-    chown conpot:conpot -R /opt/conpot && \
+    chown ${CONPOT_USER}:${CONPOT_GROUP} -R /opt/conpot && \
     chmod +x /code/entrypoint.sh
 
 WORKDIR ${CONPOT_DIR}
@@ -40,7 +40,7 @@ RUN pip3 install --no-cache-dir --upgrade pip pika requests fluent-logger cymruw
 
 RUN mkdir -p /etc/conpot /var/log/conpot /usr/share/wireshark && \
     wget https://github.com/wireshark/wireshark/raw/master/manuf -o /usr/share/wireshark/manuf
-RUN chown $CONPOT_USER /etc/conpot /var/log/conpot
+
 USER $CONPOT_USER
 RUN git clone --branch Release_0.6.0 https://github.com/mushorg/conpot.git
 

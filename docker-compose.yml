@@ -6,4 +6,6 @@ services:
       dockerfile: Dockerfile
     image: conpot:latest
     volumes:
-      - ./conpot:/etc/conpot/:z
+      - configs:/etc/conpot/
+volumes:
+  configs:

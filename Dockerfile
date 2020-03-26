@@ -41,8 +41,7 @@ RUN mkdir -p /etc/conpot /var/log/conpot /usr/share/wireshark && \
     wget https://github.com/wireshark/wireshark/raw/master/manuf -o /usr/share/wireshark/manuf
 
 USER $CONPOT_USER
-#RUN git clone --branch Release_0.6.0 https://github.com/mushorg/conpot.git
-RUN git clone --branch master https://github.com/JesseBowling/conpot.git
+RUN git clone --branch Release_0.6.0 https://github.com/mushorg/conpot.git
 COPY output/log_worker.py ${CONPOT_DIR}/conpot/conpot/core/loggers
 
 WORKDIR ${CONPOT_DIR}/conpot

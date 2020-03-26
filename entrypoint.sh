@@ -14,6 +14,7 @@ main () {
     if [[ ${DEBUG} == "true" ]]
     then
       set -o xtrace
+      CONPOT_DEBUG="-v"
     fi
 
     # Register this host with CHN if needed
@@ -43,7 +44,7 @@ main () {
       -r /code/conpot.cfg.template \
       -o /opt/conpot/conpot.cfg
 
-    exec /opt/conpot/conpot/bin/conpot --template ${CONPOT_TEMPLATE:-default} -c /opt/conpot/conpot.cfg -l /var/log/conpot/conpot.log
+    exec /opt/conpot/conpot/bin/conpot --template ${CONPOT_TEMPLATE:-default} -c /opt/conpot/conpot.cfg -l /var/log/conpot/conpot.log ${CONPOT_DEBUG}
 }
 
 main "$@"

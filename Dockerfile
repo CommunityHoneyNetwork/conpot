@@ -1,4 +1,5 @@
 FROM ubuntu:18.04
+# hadolint ignore=DL3008,DL3005
 
 LABEL maintainer Team STINGAR <team-stingar@duke.edu>
 LABEL name "conpot"
@@ -10,6 +11,7 @@ LABEL authoritative-source-url "https://github.com/CommunityHoneyNetwork/conpot"
 LABEL changelog-url "https://github.com/CommunityHoneyNetwork/conpot/commits/master"
 
 # Set DOCKER var - used by Conpot init to determine logging
+ENV DEBIAN_FRONTEND "noninteractive"
 ENV DOCKER "yes"
 ENV CONPOT_USER "conpot"
 ENV CONPOT_GROUP "conpot"

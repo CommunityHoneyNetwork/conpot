@@ -34,7 +34,7 @@ jobs:
         id: prepare
         run: |
           DOCKER_IMAGE=stingar/conpot
-          DOCKER_PLATFORMS=linux/amd64,linux/ppc64le
+          DOCKER_PLATFORMS=linux/amd64
           VERSION=${GITHUB_REF##*/}
 
           if [[ $GITHUB_REF == refs/tags/* ]]; then

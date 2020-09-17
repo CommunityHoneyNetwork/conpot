@@ -126,7 +126,7 @@ class LogWorker(object):
         while self.enabled:
             try:
                 event = self.log_queue.get(timeout=2)
-            except Empty:
+            except Empty as e:
                 self._process_sessions()
             else:
                 if self.public_ip:

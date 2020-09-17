@@ -1,6 +1,10 @@
 [common]
 sensorid = default
 
+[virtual_file_system]
+data_fs_url =  /tmp/
+fs_url =  tar:///home/conpot/.local/lib/python3.6/site-packages/conpot-0.6.0-py3.6.egg/conpot/data.tar
+
 [session]
 timeout = 30
 
@@ -17,6 +21,13 @@ enabled = False
 
 [mysql]
 enabled = False
+device = /tmp/mysql.sock
+host = localhost
+port = 3306
+db = conpot
+username = conpot
+passphrase = conpot
+socket = tcp        ; tcp (sends to host:port), dev (sends to mysql device/socket file)
 
 [syslog]
 enabled = False
@@ -41,15 +52,13 @@ host = taxiitest.mitre.org
 port = 80
 inbox_path = /services/inbox/default/
 use_https = False
-include_contact_info = False
-contact_name = ...
-contact_email = ...
 
 [fetch_public_ip]
 enabled = True
-urls = ["http://www.telize.com/ip", "http://icanhazip.com/", "http://ifconfig.me/ip"]
+urls = ["http://whatismyip.akamai.com/", "http://wgetip.com/"]
 
 [change_mac_addr]
 enabled = False
 iface = eth0
 addr = 00:de:ad:be:ef:00
+

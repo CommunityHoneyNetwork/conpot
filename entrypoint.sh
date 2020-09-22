@@ -15,6 +15,8 @@ main () {
     then
       set -o xtrace
       CONPOT_DEBUG="-v"
+    else
+      CONPOT_DEBUG=""
     fi
 
     # Register this host with CHN if needed

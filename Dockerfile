@@ -1,14 +1,14 @@
 FROM ubuntu:18.04
 # hadolint ignore=DL3008,DL3005
 
-LABEL maintainer Team STINGAR <team-stingar@duke.edu>
-LABEL name "conpot"
-LABEL version "1.9"
-LABEL release "1"
-LABEL summary "Conpot Honeypot container"
-LABEL description "Conpot is an ICS honeypot with the goal to collect intelligence about the motives and methods of adversaries targeting industrial control systems"
-LABEL authoritative-source-url "https://github.com/CommunityHoneyNetwork/conpot"
-LABEL changelog-url "https://github.com/CommunityHoneyNetwork/conpot/commits/master"
+LABEL maintainer="Team STINGAR <team-stingar@duke.edu>"
+LABEL name="conpot"
+LABEL version="1.9.1"
+LABEL release="1"
+LABEL summary="Conpot Honeypot container"
+LABEL description="Conpot is an ICS honeypot with the goal to collect intelligence about the motives and methods of adversaries targeting industrial control systems"
+LABEL authoritative-source-url="https://github.com/CommunityHoneyNetwork/conpot"
+LABEL changelog-url="https://github.com/CommunityHoneyNetwork/conpot/commits/master"
 
 # Set DOCKER var - used by Conpot init to determine logging
 ENV DEBIAN_FRONTEND "noninteractive"

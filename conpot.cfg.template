@@ -45,6 +45,7 @@ ident = $HPF_IDENT
 secret = $HPF_SECRET
 channels = ["conpot.events", ]
 tags = $HPF_TAGS
+reported_ip = 'UNSET_REPORTED_IP'
 
 [taxii]
 enabled = False

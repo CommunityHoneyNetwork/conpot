@@ -53,17 +53,6 @@ class LogWorker(object):
         if config.getboolean('sqlite', 'enabled'):
             self.sqlite_logger = SQLiteLogger()
 
-        # if config.getboolean('mysql', 'enabled'):
-        #     host = config.get('mysql', 'host')
-        #     port = config.getint('mysql', 'port')
-        #     db = config.get('mysql', 'db')
-        #     username = config.get('mysql', 'username')
-        #     passphrase = config.get('mysql', 'passphrase')
-        #     logdevice = config.get('mysql', 'device')
-        #     logsocket = config.get('mysql', 'socket')
-        #     sensorid = config.get('common', 'sensorid')
-        #     self.mysql_logger = MySQLlogger(host, port, db, username, passphrase, logdevice, logsocket, sensorid)
-
         if config.getboolean('json', 'enabled'):
             filename = config.get('json', 'filename')
             sensorid = config.get('common', 'sensorid')
@@ -75,6 +64,10 @@ class LogWorker(object):
             ident = config.get('hpfriends', 'ident')
             secret = config.get('hpfriends', 'secret')
             channels = eval(config.get('hpfriends', 'channels'))
+            if config.get('hpfriends', 'reported_ip'):
+                self.reported_ip = config.get('hpfriends', 'reported_ip')
+                if self.reported_ip == 'UNSET_REPORTED_IP':
+                    self.reported_ip = None
 
             try:
                 self.tags = [tag.strip() for tag in config.get('hpfriends', 'tags').split(',')]
@@ -134,13 +127,12 @@ class LogWorker(object):
 
                 if self.friends_feeder:
                     event["tags"] = self.tags
+                    if self.reported_ip:
+                        event["public_ip"] = self.reported_ip
                     self.friends_feeder.log(json.dumps(event, default=json_default))
 
                 if self.sqlite_logger:
                     self.sqlite_logger.log(event)
-
-                # if self.mysql_logger:
-                #     self.mysql_logger.log(event)
 
                 if self.syslog_client:
                     self.syslog_client.log(event)

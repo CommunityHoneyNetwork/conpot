@@ -26,12 +26,13 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /code
-COPY output /code/output
 COPY requirements.txt conpot.cfg.template entrypoint.sh /code/
 RUN python3 -m pip install --upgrade pip setuptools wheel \
   && python3 -m pip install --no-cache-dir --upgrade pip pika requests fluent-logger cymruwhois setuptools coverage \
   && python3 -m pip install --no-cache-dir -r /code/requirements.txt
+
+RUN mkdir -p /code
+COPY output /code/output
 
 RUN groupadd -r -g 1000 ${CONPOT_GROUP} && \
     useradd -r -u 1000 -m -g ${CONPOT_GROUP} ${CONPOT_USER} && \

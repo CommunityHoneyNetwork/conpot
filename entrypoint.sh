@@ -25,7 +25,7 @@ main () {
         -d "${DEPLOY_KEY}" \
         -u "${CHN_SERVER}" -k \
         -o "${CONPOT_JSON}" \
-        -i "${IP_ADDRESS}"
+        -i "${REPORTED_IP}"
 
     local uid="$(cat ${CONPOT_JSON} | jq -r .identifier)"
     local secret="$(cat ${CONPOT_JSON} | jq -r .secret)"
@@ -38,6 +38,10 @@ main () {
     export CONPOT_hpfriends__ident="${uid}"
     export CONPOT_hpfriends__secret="${secret}"
     export CONPOT_hpfriends__tags="${TAGS}"
+    if [ ! -z "${REPORTED_IP}" ]
+    then
+      export CONPOT_hpfriends__reported_ip="${REPORTED_IP}"
+    fi
 
     # Write out custom conpot config
     containedenv-config-writer.py \
